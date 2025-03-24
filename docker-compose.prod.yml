@@ -20,7 +20,7 @@ services:
 
   notejam:
     image: sursin2701/notejam:latest
-    # build: ./notejam
+    
     container_name: notejam-app
     restart: always
     depends_on:
