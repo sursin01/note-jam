@@ -21,7 +21,7 @@ spec:
     spec:
       
       containers:
-        - image: sursin2701/note-jam:v1.0.2
+        - image: sursin2701/note-jam:v1.0.4
           name: notejam
           env:
             - name: DATABASE_URL
@@ -79,12 +79,7 @@ spec:
             requests:
               cpu: "250m"
               memory: "256Mi"
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 3000
-            initialDelaySeconds: 10
-            periodSeconds: 5
+          
       volumes:
         - name: notejam-storage
           persistentVolumeClaim:

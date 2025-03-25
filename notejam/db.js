@@ -6,7 +6,14 @@ var settings = require('./settings');
 const { Pool } = require("pg");
 const pool = new Pool(settings.db);
 console.log("intializing the database")
+console.log("these are the env")
 console.log(process.env.DATABASE_URL)
+console.log(process.env.POSTGRES_HOST)
+
+console.log(process.env.POSTGRES_USER)
+console.log(process.env.POSTGRES_PASSWORD)
+
+
 var functions = {
   createTables: function (next) {
     async.series({
@@ -15,6 +22,8 @@ var functions = {
       
 pool.query("CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY NOT NULL, email VARCHAR(75) NOT NULL, password VARCHAR(128) NOT NULL);", [], function (err, result) {
   if (err) {
+
+  
     console.error("Error creating table:", err.message);
     return callback(err); // Pass the error to the callback for further handling
   }

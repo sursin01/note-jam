@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: postgres
   serviceName: "postgres-service"
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -46,7 +46,7 @@ spec:
             - name: POSTGRES_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: configmap
+                  name:   configmap
                   key: POSTGRES_PORT
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
@@ -60,3 +60,5 @@ spec:
         resources:
           requests:
             storage: 100Mi
+
+
