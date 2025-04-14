@@ -4,7 +4,7 @@ metadata:
   name: notejam-service
   namespace: default
 spec:
-  type: LoadBalancer  # 🔥 Changed from ClusterIP to NodePort
+  type: NodePort  # 🔥 Changed from ClusterIP to NodePort
   selector:
     app: notejam-backend
   ports:

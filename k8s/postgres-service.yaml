@@ -3,11 +3,12 @@ kind: Service
 metadata:
   name: postgres-service
 spec:
-  type: NodePort
+ 
   selector:
     app: postgres
+  clusterIP: None
   ports:
     - protocol: TCP
       port: 5432        # Service Port (Used by clients)
       targetPort: 5432  # PostgreSQL Container Port
-      nodePort: 30007   # (Must be between 30000-32767)
+      # nodePort: 30007   # (Must be between 30000-32767)

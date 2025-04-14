@@ -4,31 +4,35 @@ metadata:
   name: notejam-ingress
   namespace: default
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+
+   
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "route"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+   
+
 spec:
   ingressClassName: nginx
   rules:
     - host: notejam.local
       http:
-        paths:
+        paths:  
           - path: /
             pathType: Prefix
             backend:
               service:
                 name: notejam-service
                 port:
-                  number: 80
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ingress-nginx-lb
-  namespace: ingress-nginx
-spec:
-  type: LoadBalancer
-  selector:
-    app.kubernetes.io/name: ingress-nginx
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
+                  number: 3000
+    - host: localhost  # 🔥 New rule for localhost
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+
+            backend:
+              service:
+                name: notejam-service
+                port:
+                  number: 3000

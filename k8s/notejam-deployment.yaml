@@ -5,11 +5,11 @@ metadata:
   namespace: default
 
 spec:
-  # strategy:
-  #   rollingUpdate:
-  #     maxSurge: 1
-  #     maxUnavailable: 1
-  #   type: RollingUpdate
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate 
   replicas: 3
   selector:
     matchLabels:
@@ -21,8 +21,8 @@ spec:
     spec:
       
       containers:
-        - image: sursin2701/note-jam:v1.0.4
-          name: notejam
+        - name: notejam-backend
+          image: sursin2701/note-jam:v1.0.15
           env:
             - name: DATABASE_URL
               valueFrom:

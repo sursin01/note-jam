@@ -27,9 +27,9 @@ spec:
 
             - name: POSTGRES_PASSWORD
               valueFrom:
-                  secretKeyRef:
-                    name: secret
-                    key: POSTGRES_PASSWORD
+                secretKeyRef:
+                  name: secret
+                  key: POSTGRES_PASSWORD
 
             - name: POSTGRES_DB
               valueFrom:
@@ -46,19 +46,12 @@ spec:
             - name: POSTGRES_PORT
               valueFrom:
                 configMapKeyRef:
-                  name:   configmap
+                  name: configmap
                   key: POSTGRES_PORT
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgres-storage
-
-  volumeClaimTemplates:
-    - metadata:
-        name: postgres-storage
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: 100Mi
-
-
+  volumes:
+    - name: postgres-storage
+      persistentVolumeClaim:
+        claimName:  postgres-pvc 

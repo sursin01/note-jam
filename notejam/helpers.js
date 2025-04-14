@@ -17,6 +17,8 @@ module.exports = {
 
   loginRequired: function (req, res, next) {
     if (req.isAuthenticated()) { return next(); }
+    console.log(req.isAuthenticated)
+    console.log(req)
     res.redirect('/signin')
   }
 }
